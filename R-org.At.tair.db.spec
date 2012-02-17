@@ -1,3 +1,4 @@
+%bcond_without bootstrap
 %global packname  org.At.tair.db
 %global rlibdir  %{_datadir}/R/library
 
@@ -12,11 +13,18 @@ Source0:          http://bioconductor.org/packages/release/data/annotation/src/c
 BuildArch:        noarch
 Requires:         R-core
 
+%if %{with_bootstrap}
 Requires:         R-methods R-AnnotationDbi 
-Requires:         R-methods R-AnnotationDbi 
+%else
+BuildRequires:    R-methods R-AnnotationDbi R-hgu95av2.db R-RUnit
+%endif
 Requires:         R-annotate 
 BuildRequires:    R-devel Rmath-devel texlive-collection-latex R-methods R-AnnotationDbi
-BuildRequires:    R-methods R-AnnotationDbi 
+%if %{with_bootstrap}
+BuildRequires:    R-methods R-AnnotationDbi
+%else
+BuildRequires:    R-methods R-AnnotationDbi R-hgu95av2.db R-RUnit
+%endif
 BuildRequires:    R-annotate 
 
 %description
@@ -34,8 +42,10 @@ mkdir -p %{buildroot}%{rlibdir}
 test -d %{packname}/src && (cd %{packname}/src; rm -f *.o *.so)
 rm -f %{buildroot}%{rlibdir}/R.css
 
+%if %{without bootstrap}
 %check
 %{_bindir}/R CMD check %{packname}
+%endif
 
 %files
 %dir %{rlibdir}/%{packname}
