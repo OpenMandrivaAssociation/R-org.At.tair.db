@@ -11,21 +11,16 @@ License:          Artistic-2.0
 URL:              http://bioconductor.org/packages/release/data/annotation/html/%{packname}.html
 Source0:          http://bioconductor.org/packages/release/data/annotation/src/contrib/%{packname}_%{version}.tar.gz
 BuildArch:        noarch
-Requires:         R-core
-
-%if %{with_bootstrap}
-Requires:         R-methods R-AnnotationDbi 
-%else
-BuildRequires:    R-methods R-AnnotationDbi R-hgu95av2.db R-RUnit
+Requires:         R-core R-methods R-AnnotationDbi
+%if %{without bootstrap}
+Requires:         R-hgu95av2.db R-RUnit
 %endif
-Requires:         R-annotate 
-BuildRequires:    R-devel Rmath-devel texlive-collection-latex R-methods R-AnnotationDbi
-%if %{with_bootstrap}
-BuildRequires:    R-methods R-AnnotationDbi
-%else
-BuildRequires:    R-methods R-AnnotationDbi R-hgu95av2.db R-RUnit
+Requires:         R-annotate
+BuildRequires:    R-devel Rmath-devel texlive-collection-latex R-methods
+BuildRequires:    R-methods R-AnnotationDbi R-annotate
+%if %{without bootstrap}
+BuildRequires:    R-hgu95av2.db R-RUnit
 %endif
-BuildRequires:    R-annotate 
 
 %description
 Genome wide annotation for Arabidopsis, primarily based on mapping using
