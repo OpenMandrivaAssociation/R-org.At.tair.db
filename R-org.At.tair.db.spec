@@ -3,13 +3,13 @@
 %global rlibdir  %{_datadir}/R/library
 
 Name:             R-%{packname}
-Version:          2.6.4
-Release:          3
+Version:          2.9.0
+Release:          1
 Summary:          Genome wide annotation for Arabidopsis
 Group:            Sciences/Mathematics
 License:          Artistic-2.0
 URL:              http://bioconductor.org/packages/release/data/annotation/html/%{packname}.html
-Source0:          http://bioconductor.org/packages/release/data/annotation/src/contrib/%{packname}_%{version}.tar.gz
+Source0:          http://bioconductor.org/packages/release/data/annotation/src/contrib/org.At.tair.db_2.9.0.tar.gz
 BuildArch:        noarch
 Requires:         R-core R-methods R-AnnotationDbi
 %if %{without bootstrap}
@@ -52,3 +52,4 @@ rm -f %{buildroot}%{rlibdir}/R.css
 %{rlibdir}/%{packname}/R
 %{rlibdir}/%{packname}/extdata
 %{rlibdir}/%{packname}/help
+
